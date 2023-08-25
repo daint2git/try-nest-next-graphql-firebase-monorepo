@@ -1,0 +1,39 @@
+# dependencies
+/node_modules
+
+# compiled output
+/dist
+
+# next.js
+/.next/
+/out/
+
+# misc
+.DS_Store
+
+# logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+
+# local env files
+.env*.local
+
+# testing
+/coverage
+
+# typescript
+*.tsbuildinfo
+next-env.d.ts
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
