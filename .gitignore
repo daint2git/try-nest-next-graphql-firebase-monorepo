@@ -1,12 +1,12 @@
 # dependencies
-node_modules/
+node_modules
 
 # compiled output
-**/dist
+dist
 
 # next.js
-**/.next/
-**/out/
+.next
+out
 
 # misc
 .DS_Store
@@ -25,7 +25,7 @@ yarn-error.log*
 .env*.local
 
 # testing
-/coverage
+coverage
 
 # typescript
 *.tsbuildinfo
