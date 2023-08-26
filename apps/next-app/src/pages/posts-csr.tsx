@@ -3,6 +3,7 @@ import {
   useGetPostsQuery,
 } from "@/__generated__/graphql-types-and-hooks";
 import PostForm from "@/components/PostForm";
+import SignOutButton from "@/components/SignoutButton";
 import Head from "next/head";
 
 export default function Page() {
@@ -30,11 +31,10 @@ export default function Page() {
       <Head>
         <title>posts csr title</title>
       </Head>
-      <main
-        className={`flex min-h-screen flex-col items-center justify-between p-24`}
-      >
+      <main className={`flex min-h-screen flex-col p-24`}>
+        <SignOutButton />
         <PostForm onSubmit={handlePostCreate} />
-        <ul className="flex flex-col gap-2">
+        <ul className="flex flex-col gap-2 max-w-[300px] mt-10">
           {data?.posts.map((post) => (
             <li
               key={post.id}
