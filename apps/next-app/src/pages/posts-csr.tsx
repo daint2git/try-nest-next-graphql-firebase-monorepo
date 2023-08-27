@@ -2,12 +2,15 @@ import {
   useCreatePostMutation,
   useGetPostsQuery,
 } from "@/__generated__/graphql-types-and-hooks";
+import Navbar from "@/components/Navbar";
 import PostForm from "@/components/PostForm";
-import SignOutButton from "@/components/SignoutButton";
+import SignOutButton from "@/components/SignOutButton";
 import Head from "next/head";
 
 export default function Page() {
-  const { data, loading, error, refetch } = useGetPostsQuery();
+  const { data, loading, error, refetch } = useGetPostsQuery({
+    fetchPolicy: "cache-and-network",
+  });
   const [createPost] = useCreatePostMutation();
 
   if (loading) return <p>Loading...</p>;
@@ -32,6 +35,7 @@ export default function Page() {
         <title>posts csr title</title>
       </Head>
       <main className={`flex min-h-screen flex-col p-24`}>
+        <Navbar />
         <SignOutButton />
         <PostForm onSubmit={handlePostCreate} />
         <ul className="flex flex-col gap-2 max-w-[300px] mt-10">

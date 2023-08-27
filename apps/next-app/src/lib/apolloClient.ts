@@ -5,6 +5,8 @@ import type { NormalizedCacheObject } from "@apollo/client";
 import { onError } from "@apollo/client/link/error";
 import deepmerge from "deepmerge";
 import { useMemo } from "react";
+// import { setContext } from "@apollo/client/link/context";
+// import { getAuthClient } from "./firebase/authClient";
 
 interface MyApolloClient extends ApolloClient<NormalizedCacheObject> {}
 
@@ -31,6 +33,29 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     }
   }
 });
+
+// const authMiddleware = setContext(async (req, { headers }) => {
+//   const { currentUser } = getAuthClient();
+
+//   console.log("vao", currentUser);
+
+//   if (!currentUser) {
+//     return { headers };
+//   }
+
+//   try {
+//     const idToken = await currentUser.getIdToken();
+
+//     return {
+//       headers: {
+//         ...headers,
+//         Authorization: `Bearer ${idToken}`,
+//       },
+//     };
+//   } catch {
+//     return { headers };
+//   }
+// });
 
 const httpLink = new HttpLink({
   uri: process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT_URI, // Server URL (must be absolute)

@@ -3,8 +3,9 @@ import {
   useCreatePostMutation,
   useGetPostsQuery,
 } from "@/__generated__/graphql-types-and-hooks";
+import Navbar from "@/components/Navbar";
 import PostForm from "@/components/PostForm";
-import SignOutButton from "@/components/SignoutButton";
+import SignOutButton from "@/components/SignOutButton";
 import { addApolloState, initializeApollo } from "@/lib/apolloClient";
 import type { GetServerSideProps } from "next";
 import Head from "next/head";
@@ -35,6 +36,7 @@ export default function Page() {
         <title>posts ssr title</title>
       </Head>
       <main className={`flex min-h-screen flex-col p-24`}>
+        <Navbar />
         <SignOutButton />
         <PostForm onSubmit={handlePostCreate} />
         <ul className="flex flex-col gap-2 max-w-[300px] mt-10">
@@ -53,7 +55,9 @@ export default function Page() {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  console.log("context.req.cookies", context.req.cookies);
+
   const apolloClient = initializeApollo();
 
   await apolloClient.query({

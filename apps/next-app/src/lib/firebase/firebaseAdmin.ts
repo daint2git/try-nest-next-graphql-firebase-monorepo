@@ -11,7 +11,7 @@ const firebaseAdminConfig: AppOptions = {
   }),
 };
 
-export function initFirebaseAdmin() {
+function initFirebaseAdmin() {
   if (getApps().length > 0) {
     log(
       "Did not initialize the Firebase admin SDK because an app already exists."
@@ -28,7 +28,13 @@ export function initFirebaseAdmin() {
   return app;
 }
 
+const app = initFirebaseAdmin();
+
+/**
+ * Returns default Firebase auth admin
+ *
+ * @returns
+ */
 export function getFirebaseAuthAdmin() {
-  const app = initFirebaseAdmin();
   return getAuth(app);
 }

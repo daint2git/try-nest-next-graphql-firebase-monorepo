@@ -1,12 +1,7 @@
-import {
-  getFirebaseAuthAdmin,
-  initFirebaseAdmin,
-} from "@/lib/firebase/firebaseAdmin";
+import { getFirebaseAuthAdmin } from "@/lib/firebase/firebaseAdmin";
 import getErrorMessage from "@/utils/getErrorMessage";
 import isString from "@/utils/isString";
 import type { NextApiRequest, NextApiResponse } from "next";
-
-initFirebaseAdmin();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const sessionCookie = req.cookies["session"];

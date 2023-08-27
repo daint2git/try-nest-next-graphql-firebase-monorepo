@@ -1,15 +1,10 @@
-import {
-  getFirebaseAuthAdmin,
-  initFirebaseAdmin,
-} from "@/lib/firebase/firebaseAdmin";
+import { getFirebaseAuthAdmin } from "@/lib/firebase/firebaseAdmin";
 import isString from "@/utils/isString";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { CookieSerializeOptions } from "cookie";
 import cookie from "cookie";
 import isProduction from "@/utils/isProduction";
 import getErrorMessage from "@/utils/getErrorMessage";
-
-initFirebaseAdmin();
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const idToken = req.body.idToken;

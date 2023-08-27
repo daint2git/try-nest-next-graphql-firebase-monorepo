@@ -1,4 +1,4 @@
-import { useAuthClient } from "@/lib/firebase/firebaseClient";
+import { useAuthClient } from "@/lib/firebase/authClient";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 

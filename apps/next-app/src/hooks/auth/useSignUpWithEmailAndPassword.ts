@@ -1,4 +1,4 @@
-import { useAuthClient } from "@/lib/firebase/firebaseClient";
+import { useAuthClient } from "@/lib/firebase/authClient";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
@@ -20,7 +20,7 @@ export function useSignUpWithEmailAndPassword() {
           password
         );
 
-        console.log({ credential });
+        // console.log({ credential });
 
         const idToken = await credential.user.getIdToken();
 
