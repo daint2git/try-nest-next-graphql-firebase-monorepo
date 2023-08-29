@@ -7,11 +7,11 @@ export function useSignInWithEmailAndPassword() {
   const router = useRouter();
   const auth = useAuthClient();
   const [error, setError] = useState<Error | null>(null);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const signIn = useCallback(
     async (email: string, password: string) => {
-      setLoading(true);
+      setIsLoading(true);
 
       try {
         const credential = await signInWithEmailAndPassword(
@@ -42,7 +42,7 @@ export function useSignInWithEmailAndPassword() {
           setError(error);
         }
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     },
     [auth, router]
@@ -52,13 +52,13 @@ export function useSignInWithEmailAndPassword() {
     signIn,
     {
       error,
-      loading,
+      isLoading,
     },
   ] as [
     typeof signIn,
     {
       error: Error | null;
-      loading: boolean;
+      isLoading: boolean;
     },
   ];
 }

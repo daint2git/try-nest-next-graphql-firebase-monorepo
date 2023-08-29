@@ -1,20 +1,22 @@
-import { useAuthClient } from "@/lib/firebase/authClient";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { useFirebaseAuth } from "@/lib/firebase/context";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 
-export function useSignUpWithEmailAndPassword() {
+export function useSignInWithEmailAndPassword() {
   const router = useRouter();
-  const auth = useAuthClient();
+  const auth = useFirebaseAuth();
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const signUp = useCallback(
+  const signIn = useCallback(
     async (email: string, password: string) => {
+      if (!auth) return;
+
       setIsLoading(true);
 
       try {
-        const credential = await createUserWithEmailAndPassword(
+        const credential = await signInWithEmailAndPassword(
           auth,
           email,
           password
@@ -22,21 +24,7 @@ export function useSignUpWithEmailAndPassword() {
 
         // console.log({ credential });
 
-        const idToken = await credential.user.getIdToken();
-
-        const response = await fetch("/api/auth/set-session", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            idToken,
-          }),
-        });
-
-        if (response.ok) {
-          router.push("/posts-csr");
-        }
+        router.push("/posts-ssr");
       } catch (error) {
         if (error instanceof Error) {
           setError(error);
@@ -49,13 +37,13 @@ export function useSignUpWithEmailAndPassword() {
   );
 
   return [
-    signUp,
+    signIn,
     {
       error,
       isLoading,
     },
   ] as [
-    typeof signUp,
+    typeof signIn,
     {
       error: Error | null;
       isLoading: boolean;

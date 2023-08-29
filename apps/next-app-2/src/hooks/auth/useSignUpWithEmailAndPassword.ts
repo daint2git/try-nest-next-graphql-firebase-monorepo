@@ -1,16 +1,18 @@
-import { useAuthClient } from "@/lib/firebase/authClient";
+import { useFirebaseAuth } from "@/lib/firebase/context";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 
 export function useSignUpWithEmailAndPassword() {
   const router = useRouter();
-  const auth = useAuthClient();
+  const auth = useFirebaseAuth();
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const signUp = useCallback(
     async (email: string, password: string) => {
+      if (!auth) return;
+
       setIsLoading(true);
 
       try {
@@ -22,21 +24,7 @@ export function useSignUpWithEmailAndPassword() {
 
         // console.log({ credential });
 
-        const idToken = await credential.user.getIdToken();
-
-        const response = await fetch("/api/auth/set-session", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            idToken,
-          }),
-        });
-
-        if (response.ok) {
-          router.push("/posts-csr");
-        }
+        router.push("/posts-csr");
       } catch (error) {
         if (error instanceof Error) {
           setError(error);

@@ -1,3 +1,8 @@
+// ------------------------------------------------------
+// THIS CODE WAS AUTOMATICALLY GENERATED
+// DO NOT EDIT THIS CODE BY HAND
+// YOU CAN REGENERATE IT USING "npm run gql:codegen"
+// -----------------------------------------------------
 import { gql } from "@apollo/client";
 import * as Apollo from "@apollo/client";
 export type Maybe<T> = T | null;
@@ -131,7 +136,7 @@ export const CreatePostDocument = gql`
  * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
  *
  * @example
- * const [createPostMutation, { data, isLoading, error }] = useCreatePostMutation({
+ * const [createPostMutation, { data, loading, error }] = useCreatePostMutation({
  *   variables: {
  *      createPostInput: // value for 'createPostInput'
  *   },
@@ -141,12 +146,12 @@ export function useCreatePostMutation(
   baseOptions?: Apollo.MutationHookOptions<
     TCreatePostMutation,
     TCreatePostMutationVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useMutation<TCreatePostMutation, TCreatePostMutationVariables>(
     CreatePostDocument,
-    options
+    options,
   );
 }
 export type CreatePostMutationHookResult = ReturnType<
@@ -166,36 +171,39 @@ export const GetPostsDocument = gql`
  * __useGetPostsQuery__
  *
  * To run a query within a React component, call `useGetPostsQuery` and pass it any options that fit your needs.
- * When your component renders, `useGetPostsQuery` returns an object from Apollo Client that contains isLoading, error, and data properties
+ * When your component renders, `useGetPostsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, isLoading, error } = useGetPostsQuery({
+ * const { data, loading, error } = useGetPostsQuery({
  *   variables: {
  *   },
  * });
  */
 export function useGetPostsQuery(
-  baseOptions?: Apollo.QueryHookOptions<TGetPostsQuery, TGetPostsQueryVariables>
+  baseOptions?: Apollo.QueryHookOptions<
+    TGetPostsQuery,
+    TGetPostsQueryVariables
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useQuery<TGetPostsQuery, TGetPostsQueryVariables>(
     GetPostsDocument,
-    options
+    options,
   );
 }
 export function useGetPostsLazyQuery(
   baseOptions?: Apollo.LazyQueryHookOptions<
     TGetPostsQuery,
     TGetPostsQueryVariables
-  >
+  >,
 ) {
   const options = { ...defaultOptions, ...baseOptions };
   return Apollo.useLazyQuery<TGetPostsQuery, TGetPostsQueryVariables>(
     GetPostsDocument,
-    options
+    options,
   );
 }
 export type GetPostsQueryHookResult = ReturnType<typeof useGetPostsQuery>;

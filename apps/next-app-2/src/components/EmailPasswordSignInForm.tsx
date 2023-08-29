@@ -39,7 +39,7 @@ function EmailPasswordSignInForm() {
         {error ? <span className="text-red-500">{error.message}</span> : null}
         <button
           type="submit"
-          // disabled={isLoading}
+          disabled={isLoading}
           className="btn btn-success w-full"
         >
           Sign In

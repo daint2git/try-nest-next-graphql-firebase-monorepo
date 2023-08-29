@@ -1,24 +1,20 @@
-import { useAuthClient } from "@/lib/firebase/authClient";
+import { useFirebaseAuth } from "@/lib/firebase/context";
 import { useRouter } from "next/router";
 import { useCallback, useState } from "react";
 
 export function useSignOut() {
   const router = useRouter();
-  const auth = useAuthClient();
+  const auth = useFirebaseAuth();
   const [error, setError] = useState<Error | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const signOut = useCallback(async () => {
+    if (!auth) return;
+
     try {
       await auth.signOut();
 
-      const response = await fetch("/api/auth/remove-session", {
-        method: "POST",
-      });
-
-      if (response.ok) {
-        router.push("/sign-in");
-      }
+      router.push("/");
     } catch (error) {
       if (error instanceof Error) {
         setError(error);
